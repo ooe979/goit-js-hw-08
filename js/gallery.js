@@ -66,15 +66,15 @@ const images = [
 
 const galleryContainer = document.querySelector(".gallery");
 
-galleryContainer.insertAdjacentHTML("beforeend", greateGellary(images));
-galleryContainer.addEventListener("click", hendleClick);
+galleryContainer.insertAdjacentHTML("beforeend", createGallary(images));
+galleryContainer.addEventListener("click", handleClick);
 
-function greateGellary(arr) {
+function createGallary(arr) {
   return arr
     .map(
       (item) => `
     <li class="gallery-item">
-  <a class="gallery-link" href="large-image.jpg">
+  <a class="gallery-link" href="${item.original}">
     <img
       class="gallery-image"
       src="${item.preview}"
@@ -86,17 +86,12 @@ function greateGellary(arr) {
     )
     .join("");
 }
-const noLink = document.querySelectorAll(".gallery-link");
-noLink.forEach((link) => {
-  link.addEventListener(`click`, (event) => {
-    event.preventDefault();
-  });
-});
 
-function hendleClick(event) {
+function handleClick(event) {
   if (event.target.nodeName === "IMG") {
     const modalLinck = event.target.dataset.source;
     console.log(modalLinck);
+    event.preventDefault();
 
     const instance = basicLightbox.create(`
         <div class="modal">
